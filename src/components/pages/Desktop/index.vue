@@ -3,13 +3,10 @@
     <div id="desktop-grid">
       <desktop-grid />
     </div>
-    
+
     <div id="desktop-siderbar">
       
       <b-button-group vertical size="lg">
-        <b-btn variant="link">
-          <font-awesome-icon icon="cog" fixed-width />
-        </b-btn>
         <b-btn variant="link">
           <font-awesome-icon icon="cubes" fixed-width />
         </b-btn>

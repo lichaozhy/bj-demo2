@@ -1,24 +1,22 @@
 const DEFAULT_GRID = {
 	step: 100,
 	origin: {
-		x: 'left',
+		x: 'right',
 		y: 'top'
 	}
 };
 
 export default class RendererObject {
-	constructor(object) {
-		this.$object = object;
-
-		console.log(object)
+	constructor(offset) {
+		this.$offset = offset;
 	}
 
 	get offset() {
-		return Object.assign({}, this.$object.offset);
+		return Object.assign({}, this.$offset);
 	}
 
-	get type() {
-		return 'icon';
+	get component() {
+		return null;
 	}
 
 	get grid() {
@@ -53,7 +51,7 @@ export default class RendererObject {
 				Math.floor((point.top - field.top) / step);
 		}
 
-		if (origin.x === 'bottom') {
+		if (origin.y === 'bottom') {
 			this.$object.offset.y =
 				Math.floor((field.height + field.top - point.top) / step);
 		}

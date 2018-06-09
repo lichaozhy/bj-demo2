@@ -1,12 +1,13 @@
 <template>
 	<div class="draggable"
+		:class="{
+			active: enabled
+		}"
 		@click="cancel()"
 		@mouseup="drop($event)"
 		@mousedown="drag($event)"
 		@mousemove="move($event)">
 		<slot />
-		<div v-if="enabled"
-			class="draggable-mask"></div>
 	</div>
 </template>
 
@@ -73,16 +74,18 @@ export default {
 	position: relative;
 	top: 0;
 	left: 0;
-	background-color: rgba(255, 0, 0, .1);
+	cursor: pointer;
 
-	.draggable-mask {
+	&.active::after {
 		position: fixed;
+		content: "";
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: 10000;
+		z-index: 1000000;
 		background-color: rgba(0,0,0, 0.2);
+		cursor: move;
 	}
 }
 </style>

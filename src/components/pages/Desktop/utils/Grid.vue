@@ -6,74 +6,31 @@
 			@drop="setPosition($event, rendererObject)"
 			:style="rendererObject.style">
 			<draggable>
-				<component :is="typeMapping[rendererObject.type]" />
+				<component :is="rendererObject.component"
+					:object="rendererObject" />
 			</draggable>
 		</div>
 	</div>
 </template>
 
 <script>
-import AppServiceIcon from './Icon';
-import AppWidget from './Widget';
+import desktopMock from '@/../mock/desktop.json';
 import Draggable from './Draggable';
-
-import RendererObject from './renderer';
+import fromDesktopOptions from './renderer/index';
 
 export default {
 	data() {
 		return {
-			typeMapping: {
-				icon: AppServiceIcon,
-				widget: AppWidget
-			},
 			rendererList: [],
-			iconGroup: {
-				grid: {
-					step: 100,
-					origin: {
-						x: 'left',
-						y: 'top'
-					}
-				},
-				data: [
-					{
-						offset: { x: 0, y: 0 }
-					},
-					{
-						offset: { x: 1, y: 1 }
-					},
-					{
-						offset: { x: 3, y: 2 }
-					},
-					{
-						offset: { x: 0, y: 3 }
-					},
-					{
-						offset: { x: 0, y: 4 }
-					},
-					{
-						offset: { x: 0, y: 5 }
-					},
-				]
-			},
 		}
 	},
 	components: {
 		Draggable
 	},
 	mounted() {
-		this.rendererList = this.renderGroup(this.iconGroup);
+		this.rendererList = fromDesktopOptions(desktopMock);
 	},
 	methods: {
-		renderGroup({ grid, data }) {
-			const rendererList = [];
-
-			data.forEach(object => {
-				rendererList.push(new RendererObject(object));
-			});
-
-			return rendererList;
-		},
 		setPosition(event, rendererObject) {
 			const point = {
 				left: event.clientX,

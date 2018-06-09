@@ -1,0 +1,147 @@
+{
+	"list": [
+		{
+			"meta": {
+				"id": 0,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 0,
+				"y": 0
+			}
+		},
+		{
+			"meta": {
+				"id": 1,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 0,
+				"y": 1
+			}
+		},
+		{
+			"meta": {
+				"id": 2,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 0,
+				"y": 2
+			}
+		},
+		{
+			"meta": {
+				"id": 3,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 0,
+				"y": 3
+			}
+		},
+		{
+			"meta": {
+				"id": 4,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 0,
+				"y": 4
+			}
+		},
+		{
+			"meta": {
+				"id": 5,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 0,
+				"y": 5
+			}
+		},
+		{
+			"meta": {
+				"id": 6,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 1,
+				"y": 0
+			}
+		},
+		{
+			"meta": {
+				"id": 7,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 1,
+				"y": 1
+			}
+		},
+		{
+			"meta": {
+				"id": 8,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 1,
+				"y": 2
+			}
+		},
+		{
+			"meta": {
+				"id": 9,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 1,
+				"y": 3
+			}
+		},
+		{
+			"meta": {
+				"id": 10,
+				"browser": [
+					"ie8", "ie9", "ie10", "ie11", "edge", "chrome", "ff"
+				]
+			},
+			"type": "icon",
+			"offset": {
+				"x": 1,
+				"y": 4
+			}
+		}
+	]
+}
