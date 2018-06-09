@@ -4,14 +4,18 @@
 
 		<div id="app-container">
 			
-			<transition name="fade" class="h-100">
-				<router-view class="app-workbench container-fluid" />
+			<transition name="fade">
+				<keep-alive>
+					<router-view class="app-workbench container-fluid" />
+				</keep-alive>
 			</transition>
 
 			<transition
 				enter-active-class="animated slideInRight"
 				leave-active-class="animated slideOutRight">
-				<app-sidebar v-if="isSidebarShow" />
+				<keep-alive>
+					<app-sidebar v-if="isSidebarShow" />
+				</keep-alive>
 			</transition>
 		</div>
 	</div>
@@ -41,16 +45,15 @@ html, body {
 }
 
 #app-container {
-	height: 100%;
-	padding-top: 56px;
 	overflow: hidden;
-	position: relative;
+	position: fixed;
+	top: 56px;
+	bottom: 0;
+	width: 100%;
 
 	.app-workbench {
 		position: absolute;
-		top: 56px;
-		bottom: 0;
-		left: 0;
+		height: 100%;
 		width: 100%;
 	}
 }

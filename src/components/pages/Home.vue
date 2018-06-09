@@ -2,11 +2,11 @@
 	<div>
 		<b-jumbotron class="m-5 rounded-0 text-center">
 			<template slot="header">
-				Bootstrap Vue
+				计算机学院统一门户
 			</template>
 			<template slot="lead">
-				This is a simple hero unit, a simple jumbotron-style component for
-				calling extra attention to featured content or information.
+				今天是个好日子，祝你整天工作好心情。马上又是忙碌的一天，开始你的科研课题。
+				如果使用本系统遇到了什么困难，请联系我。
 			</template>
 			<hr class="my-4">
 			<p>

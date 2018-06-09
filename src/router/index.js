@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Home from '@/components/pages/Home';
-import Desktop from '@/components/pages/Desktop';
+import Desktop from '@/components/pages/Desktop/index';
 import Todo from '@/components/pages/Todo';
 import Audit from '@/components/pages/Audit';
 

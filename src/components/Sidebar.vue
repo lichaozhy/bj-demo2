@@ -6,7 +6,16 @@
 			<b-tabs card class="h-100" small>
 				<b-tab>
 					<template slot="title"><font-awesome-icon
-						icon="exclamation-circle"
+						icon="exclamation-triangle"
+						class="mr-1"
+						fixed-width />预警
+					</template>
+
+					Colleague
+				</b-tab>
+				<b-tab>
+					<template slot="title"><font-awesome-icon
+						icon="envelope"
 						class="mr-1"
 						fixed-width />通知
 					</template>
@@ -76,12 +85,18 @@ export default {
 
 <style lang="less">
 #app-sidebar {
+	transition: opacity 500ms;
+	opacity: .75;
 	position: absolute;
-	top: 56px;
-	bottom: 0;
+	top: 0;
+	height: 100%;
 	right: 0;
 	width: 340px;
 	background-color: #f0f0f0;
+
+	&:hover {
+		opacity: 1;
+	}
 }
 
 .vdp-datepicker__calendar {
