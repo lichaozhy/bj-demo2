@@ -38,6 +38,12 @@
 					<b-input-group size="sm">
 						<b-form-input
 							type="text"
+							id="retrieve-bottom"
+							autocomplete="off"
+							v-model="keyword"
+							@input.native="showHistory()"
+							@focus.native="showHistory()"
+							@blur.native="hideHistory()"
 							placeholder="全文检索"></b-form-input>
 							<b-input-group-append>
 								<b-btn size="sm" type="submit">
@@ -45,7 +51,18 @@
 								</b-btn>
 							</b-input-group-append>
 					</b-input-group>
+					
 				</b-nav-form>
+				
+				<b-popover
+					ref="popover"
+					no-fade
+					placement="bottom"
+					target="retrieve-bottom" :title="`历史查询`">
+					<p v-for="word in filteredHistory"
+						:key="word"
+						@click="keyword=word">{{word}}</p>
+				</b-popover>
 
 				<b-nav-item-dropdown right>
 					<!-- Using button-content slot -->
@@ -67,9 +84,44 @@
 
 <script>
 export default {
+	data() {
+		return {
+			keyword: '',
+			isHistoryShow: false,
+			history: [
+				'检察院', '公检法', '国务院', '党中央', '统战部',
+				'检察机关', '检验真理', '例行检查', '消防安检', '检查站',
+				'反腐倡廉', '万众创新', '公诉刑事案件', '朝阳区人民群众',
+				'举报', '人民群众', '庞氏骗局', '互联网+', '检查线路',
+				'中央巡视组', '城投集团', '融创', '宝能', '央行',
+				'英雄机长', '普京', '俄罗斯', '张召忠', '清华控股',
+				'军队', '土改', '改革开放', '十九大', '台湾',
+			]
+		}
+	},
 	computed: {
 		isSidebarShow() {
 			return this.$store.state.page.isSidebarShow;
+		},
+		filteredHistory() {
+			const keyword = this.keyword.replace(/\s/g, '').split('');
+
+			const set = {};
+
+			keyword.forEach(char => {
+				this.history.forEach(history => {
+					if (history.indexOf(char) !== -1) {
+						set[history] = true;
+					}
+				});
+			});
+
+			const list = Object.keys(set);
+			if (list.length > 5) {
+				list.length = 5;
+			}
+
+			return list;
 		}
 	},
 	methods: {
@@ -78,6 +130,13 @@ export default {
 		},
 		closeSidebar() {
 			this.$store.dispatch('page/closeSidebar');
+		},
+		showHistory() {
+			this.$refs.popover.$emit('close');
+			this.$refs.popover.$emit('open');
+		},
+		hideHistory() {
+			this.$refs.popover.$emit('close');
 		}
 	}
 };

@@ -125,6 +125,7 @@ export default {
 	right: 0;
 	width: 340px;
 	background-color: #f0f0f0;
+	z-index: 10;
 
 	&:hover {
 		opacity: 1;

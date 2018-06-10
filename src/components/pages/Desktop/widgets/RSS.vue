@@ -33,7 +33,6 @@ export default {
     mounted() {
         const parser = this.parser = new RSSParser();
         const url = this.object.meta.url;
-        console.log(this.object)
 
         parser.parseURL(proxy + url, (err, feed) => {
             feed.items.splice(10);
