@@ -3,8 +3,10 @@
 		<b-btn class="icon-btn"
 			variant="link"
 			size="sm">
-			<div></div>
-			{{object.meta.id}}
+			<div>
+				<img src="@/assets/apps/0.svg" />
+			</div>
+			{{service.name}}
 		</b-btn>
 	</div>
 </template>
@@ -14,6 +16,15 @@ import serviceMock from '@/../mock/service.json';
 
 export default {
 	props: ['object'],
+	computed: {
+		service() {
+			const serviceId = this.object.meta.id;
+
+			return serviceMock.find(service => {
+				return service.id === serviceId;
+			});
+		}
+	}
 }
 </script>
 
@@ -33,6 +44,10 @@ export default {
 			height: 80px;
 			width: 80px;
 			margin: 0 auto;
+
+			img {
+				width: 80px;
+			}
 		}
 	}
 }

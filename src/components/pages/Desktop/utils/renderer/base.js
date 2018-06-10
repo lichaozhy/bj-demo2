@@ -8,7 +8,7 @@ const DEFAULT_GRID = {
 
 export default class RendererObject {
 	constructor(offset) {
-		this.$offset = offset;
+		this.$offset = Object.assign({}, offset);
 	}
 
 	get offset() {
@@ -31,29 +31,5 @@ export default class RendererObject {
 			[origin.x]: `${x * step}px`,
 			[origin.y]: `${y * step}px`
 		};
-	}
-
-	updateOffset(point, field) {
-		const { origin, step } = this.grid;
-
-		if (origin.x === 'left') {
-			this.$object.offset.x =
-				Math.floor((point.left - field.left) / step);
-		}
-
-		if (origin.x === 'right') {
-			this.$object.offset.x =
-				Math.floor((field.width + field.left - point.left) / step);
-		}
-		
-		if (origin.y === 'top') {
-			this.$object.offset.y =
-				Math.floor((point.top - field.top) / step);
-		}
-
-		if (origin.y === 'bottom') {
-			this.$object.offset.y =
-				Math.floor((field.height + field.top - point.top) / step);
-		}
 	}
 }

@@ -14,13 +14,18 @@
 
 			<b-navbar-nav>
 				<b-nav-item
-					to="/home">
-					<font-awesome-icon icon="home" />
+					to="/home"><font-awesome-icon
+						class="mr-2"
+						icon="home" />欢迎
 				</b-nav-item>
 				<b-nav-item
-					to="/desktop">我的桌面</b-nav-item>
+					to="/desktop"><font-awesome-icon
+						class="mr-2"
+						icon="desktop" />我的桌面</b-nav-item>
 				<b-nav-item
-					to="/todo">待办工作</b-nav-item>
+					to="/todo"><font-awesome-icon
+						class="mr-2"
+						icon="briefcase" />待办工作</b-nav-item>
 				<b-nav-item-dropdown
 					text="更多">
 					<b-dropdown-item to="/audit">审计</b-dropdown-item>

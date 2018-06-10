@@ -3,9 +3,9 @@
 		<div class="desktop-object"
 			v-for="(rendererObject, index) in rendererList"
 			:key="index"
-			@drop="setPosition($event, rendererObject)"
+			@drop="setPosition($event, rendererObject, index)"
 			:style="rendererObject.style">
-			<draggable>
+			<draggable :is-prevented="!isSetting">
 				<component :is="rendererObject.component"
 					:object="rendererObject" />
 			</draggable>
@@ -14,24 +14,29 @@
 </template>
 
 <script>
-import desktopMock from '@/../mock/desktop.json';
 import Draggable from './Draggable';
 import fromDesktopOptions from './renderer/index';
 
 export default {
 	data() {
 		return {
-			rendererList: [],
+		}
+	},
+	computed: {
+		isSetting() {
+			return this.$store.state.desktop.isSetting;
+		},
+		rendererList() {
+			const options = this.$store.state.desktop.options;
+
+			return fromDesktopOptions(options);
 		}
 	},
 	components: {
 		Draggable
 	},
-	mounted() {
-		this.rendererList = fromDesktopOptions(desktopMock);
-	},
 	methods: {
-		setPosition(event, rendererObject) {
+		setPosition(event, rendererObject, index) {
 			const point = {
 				left: event.clientX,
 				top: event.clientY
@@ -44,7 +49,28 @@ export default {
 				width: this.$el.offsetWidth
 			};
 
-			rendererObject.updateOffset(point, field);
+			const { origin, step } = rendererObject.grid;
+			const offset = { x: null, y: null };
+
+			if (origin.x === 'left') {
+				offset.x = Math.floor((point.left - field.left) / step);
+			}
+
+			if (origin.x === 'right') {
+				offset.x = Math.floor((field.width + field.left - point.left) / step);
+			}
+			
+			if (origin.y === 'top') {
+				offset.y = Math.floor((point.top - field.top) / step);
+			}
+
+			if (origin.y === 'bottom') {
+				offset.y = Math.floor((field.height + field.top - point.top) / step);
+			}
+
+			this.$store.dispatch('desktop/setObjectOffset', {
+				index, offset
+			});
 		}
 	}
 }

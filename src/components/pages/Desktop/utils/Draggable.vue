@@ -1,7 +1,7 @@
 <template>
 	<div class="draggable"
 		:class="{
-			active: enabled
+			active: isDragging
 		}"
 		@click="cancel()"
 		@mouseup="drop($event)"
@@ -15,26 +15,31 @@
 export default {
 	data() {
 		return {
-			throttle: null,
-			enabled: false,
+			isDragging: false,
 			start: { x: 0, y: 0 },
+		}
+	},
+	props: {
+		isPrevented: {
+			default: false,
+			type: Boolean
 		}
 	},
 	methods: {
 		drag(event) {
-			this.throttle = setTimeout(() => {
-				this.enabled = true;
-	
-				this.start.x = event.clientX;
-				this.start.y = event.clientY;
+			if (this.isPrevented) {
+				return;
+			}
+			
+			this.isDragging = true;
 
-				this.throttle = null;
-				
-				this.$emit('drag');
-			}, 1000);
+			this.start.x = event.clientX;
+			this.start.y = event.clientY;
+
+			this.$emit('drag');
 		},
 		move(event) {
-			if (!this.enabled) {
+			if (!this.isDragging) {
 				return;
 			}
 
@@ -42,11 +47,11 @@ export default {
 			this.$el.style.top = `${event.clientY - this.start.y}px`;
 		},
 		drop(event) {
-			if (!this.enabled) {
+			if (!this.isDragging) {
 				return;
 			}
 
-			this.enabled = false;
+			this.isDragging = false;
 			this.start.x = 0;
 			this.start.y = 0;
 			this.$el.style.left = 0;
@@ -60,9 +65,7 @@ export default {
 			}));
 		},
 		cancel() {
-			clearTimeout(this.throttle);
-			this.throttle = null;
-			this.enabled = false;
+			this.isDragging = false;
 		}
 	}
 	
@@ -74,7 +77,6 @@ export default {
 	position: relative;
 	top: 0;
 	left: 0;
-	cursor: pointer;
 
 	&.active::after {
 		position: fixed;
@@ -83,8 +85,7 @@ export default {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: 1000000;
-		background-color: rgba(0,0,0, 0.2);
+		z-index: 9999;
 		cursor: move;
 	}
 }

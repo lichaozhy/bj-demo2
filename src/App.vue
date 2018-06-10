@@ -5,9 +5,7 @@
 		<div id="app-container">
 			
 			<transition name="fade">
-				<keep-alive>
-					<router-view class="app-workbench container-fluid" />
-				</keep-alive>
+				<router-view class="app-workbench container-fluid" />
 			</transition>
 
 			<transition

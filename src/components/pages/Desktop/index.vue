@@ -4,25 +4,15 @@
       <desktop-grid />
     </div>
 
-    <div id="desktop-siderbar">
-      
-      <b-button-group vertical size="lg">
-        <b-btn variant="link">
-          <font-awesome-icon icon="cubes" fixed-width />
-        </b-btn>
-        <b-btn variant="link">
-          <font-awesome-icon icon="window-maximize" fixed-width />
-        </b-btn>
-        <b-btn variant="link">
-          <font-awesome-icon icon="rss-square" fixed-width />
-        </b-btn>
-      </b-button-group>
+    <div id="desktop-menu">
+      <desktop-menu />
     </div>
   </div>
 </template>
 
 <script>
 import DesktopGrid from './utils/Grid';
+import DesktopMenu from './utils/Menu';
 
 const MOCK = {
   ALL_APP_META_LIST: [],
@@ -33,24 +23,20 @@ const MOCK = {
 export default {
   name: 'AppDesktop',
   components: {
-    DesktopGrid
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+    DesktopGrid,
+    DesktopMenu
   }
 }
 </script>
 
 <style lang="less">
-#desktop-siderbar {
+#desktop-menu {
   background-color: #ccc;
-  color: #fff;
-  height: 100%;
+  height: 200px;
   position: absolute;
   left: 0;
-  min-width: 40px;
+  bottom: 0;
+  width: 100%;
 }
 
 #desktop-grid {
