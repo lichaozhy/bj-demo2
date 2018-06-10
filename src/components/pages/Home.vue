@@ -9,9 +9,7 @@
 				如果使用本系统遇到了什么困难，请联系我。
 			</template>
 			<hr class="my-4">
-			<p>
-				It uses utility classes for typography and spacing to space content
-				out within the larger container.
+			<p>具有单点登录区域，包括各业务系统（如检察办公、检务保障、队伍管理、决策支持、检察科技、司法鉴定、日志管理、运维管理等）的快捷入口，以图标方式排列。图标可以由拖拽方式组织顺序。DEMO版本中可以不做实际的系统跳转功能实现。
 			</p>
 			<b-btn variant="primary" href="#">Do Something</b-btn>
 			<b-btn variant="success" href="#">Do Something Else</b-btn>

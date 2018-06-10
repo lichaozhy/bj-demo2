@@ -3,8 +3,7 @@
 		id="app-navbar"
 		toggleable="md"
 		type="dark"
-		variant="dark"
-		fixed="top">
+		variant="dark">
 
 		<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 

@@ -1,7 +1,8 @@
 <template>
 	<div class="draggable"
 		:class="{
-			active: isDragging
+			active: isDragging,
+			setting:isSetting
 		}"
 		@click="cancel()"
 		@mouseup="drop($event)"
@@ -13,6 +14,11 @@
 
 <script>
 export default {
+	computed: {
+		isSetting() {
+			return this.$store.state.desktop.isSetting;
+		},
+	},
 	data() {
 		return {
 			isDragging: false,
@@ -77,6 +83,17 @@ export default {
 	position: relative;
 	top: 0;
 	left: 0;
+
+	&.setting::before {
+		content: "";
+		cursor: move;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+		top:0;
+		left: 0;
+	}
 
 	&.active::after {
 		position: fixed;

@@ -35,6 +35,7 @@ export default {
 	text-align: center;
 	width: 120px;
 	height: 120px;
+	position: relative;
 
 	.icon-btn {
 		width: 100%;

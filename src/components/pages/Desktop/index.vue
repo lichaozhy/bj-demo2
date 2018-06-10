@@ -30,6 +30,23 @@ export default {
 </script>
 
 <style lang="less">
+#app-page-desktop {
+  background-image: url('../../../assets/desktop-bg.svg');
+  background-position: center center;
+  background-size: 20%;
+  background-repeat: no-repeat;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255,255,255,.5);
+  }
+}
+
 #desktop-menu {
   background-color: #ccc;
   height: 200px;

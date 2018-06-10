@@ -1,5 +1,6 @@
 <template>
-	<div class="desktop-grid">
+	<div class="desktop-grid"
+		:class="{setting:isSetting}">
 		<div class="desktop-object"
 			v-for="(rendererObject, index) in rendererList"
 			:key="index"
@@ -9,6 +10,14 @@
 				<component :is="rendererObject.component"
 					:object="rendererObject" />
 			</draggable>
+			<b-button-group
+				v-if="isSetting"
+				class="object-toolbar"
+				size="sm">
+				<b-button
+					@click="remove(index)"
+					variant="danger"><font-awesome-icon icon="trash" /></b-button>
+			</b-button-group>
 		</div>
 	</div>
 </template>
@@ -36,6 +45,9 @@ export default {
 		Draggable
 	},
 	methods: {
+		remove(index) {
+			this.$store.dispatch('desktop/removeObject', index);
+		},
 		setPosition(event, rendererObject, index) {
 			const point = {
 				left: event.clientX,
@@ -82,8 +94,24 @@ export default {
 	height: 100%;
 	width: 100%;
 
+	&.setting .desktop-object{
+		box-shadow: 0 0 1px 1px inset #f0f0f0 ;
+	}
+
 	.desktop-object {
 		position: absolute;
+
+		.object-toolbar {
+			button {
+				line-height: 12px;
+				padding: 5px;
+				font-size: 12px;
+			}
+			position: absolute;
+			z-index: 99999;
+			top: 0;
+			right: 0;
+		}
 	}
 }
 </style>
