@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import './widgets';
 import DesktopGrid from './utils/Grid';
 import DesktopMenu from './utils/Menu';
 

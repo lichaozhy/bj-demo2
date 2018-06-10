@@ -52,8 +52,6 @@
 					<template slot="button-content">
 						<font-awesome-icon icon="user" />
 					</template>
-					<b-dropdown-item href="#">首选项</b-dropdown-item>
-					<b-dropdown-divider />
 					<b-dropdown-item href="#">退出</b-dropdown-item>
 				</b-nav-item-dropdown>
 

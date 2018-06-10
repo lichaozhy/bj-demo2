@@ -9,12 +9,34 @@ const WIDGET_GRID = {
 	}
 };
 
-export default class IconRendererObject extends RendererObject {
+const widgetMapping = {};
+
+export default class WidgetRendererObject extends RendererObject {
+	constructor({ meta, offset, size }) {
+		super(offset);
+
+		this.size = size;
+		this.meta = meta;
+	}
+
 	get component() {
-		return Widget;
+		return widgetMapping[this.meta.widget];
+	}
+
+	get style() {
+		const { step } = this.grid;
+
+		return Object.assign({
+			height: `${this.size.height * step}px`,
+			width: `${this.size.width * step}px`
+		}, super.style);
 	}
 
 	get grid() {
 		return WIDGET_GRID;
+	}
+
+	static register(name, componentOptions) {
+		widgetMapping[name] = componentOptions;
 	}
 }

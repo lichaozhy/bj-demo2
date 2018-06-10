@@ -10,8 +10,28 @@
 						class="mr-1"
 						fixed-width />预警
 					</template>
+					
+					<b-alert show dismissible variant="warning">
+						<b-card header="来自：待办任务"
+							footer="2018-06-07">
+							#104 接收鉴定表 待办工作即将超时
+						</b-card>
+					</b-alert>
+					
+					<b-alert show dismissible variant="warning">
+						<b-card header="来自：待办任务"
+							footer="2018-06-07">
+							#103 接收鉴定表 待办工作即将超时
+						</b-card>
+					</b-alert>
+					
+					<b-alert show dismissible variant="warning">
+						<b-card header="来自：待办任务"
+							footer="2018-06-07">
+							#102 接收鉴定表 待办工作即将超时
+						</b-card>
+					</b-alert>
 
-					Colleague
 				</b-tab>
 				<b-tab>
 					<template slot="title"><font-awesome-icon
@@ -19,8 +39,20 @@
 						class="mr-1"
 						fixed-width />通知
 					</template>
-
-					Colleague
+					
+					<b-alert show dismissible>
+						<b-card header="来自：研发部"
+							footer="2018-06-07">
+							具有良好的用户使用体验(UI设计)，包括但不限于上述模块。
+						</b-card>
+					</b-alert>
+					
+					<b-alert show dismissible>
+						<b-card header="来自：核平系统"
+							footer="2018-06-07">
+							发射目标：大犬座-VY
+						</b-card>
+					</b-alert>
 				</b-tab>
 				<b-tab active>
 					<template slot="title"><font-awesome-icon
@@ -40,7 +72,7 @@
 
 					<h5>行程安排</h5>
 				</b-tab>
-				<b-tab>
+				<!-- <b-tab>
 					<template slot="title"><font-awesome-icon
 						icon="user-friends"
 						class="mr-1"
@@ -48,7 +80,7 @@
 					</template>
 
 					Colleague
-				</b-tab>
+				</b-tab> -->
 			</b-tabs>
 
 			<b-card-footer>

@@ -26,22 +26,12 @@
 					{{service.name}}
 				</b-btn>
 			</b-tab>
-			<b-tab title="Tab 3">
-				<template slot="title">
-					<font-awesome-icon icon="window-maximize" fixed-width />所有挂件
-				</template>
-				
-				<b-btn>添加一个待办挂件</b-btn>
-				<b-btn>添加一个邮箱挂件</b-btn>
-				<b-btn>添加一个通知挂件</b-btn>
-				<b-btn>添加一个统计挂件</b-btn>
-				<b-btn>添加一个预警挂件</b-btn>
-			</b-tab>
-			<b-tab title="Tab 3">
+			<b-tab>
 				<template slot="title">
 					<font-awesome-icon icon="rss-square" fixed-width />RSS挂件
 				</template>
-			Tab Contents 4
+				<b-input v-model="url" placeholder="RSS地址"></b-input>
+				<b-btn @click="addRSSWidget()">生成</b-btn>
 			</b-tab>
 		</b-tabs>
 	</b-card>
@@ -49,6 +39,11 @@
 
 <script>
 export default {
+	data() {
+		return {
+			url: '',
+		}
+	},
 	computed: {
 		isSetting() {
 			return this.$store.state.desktop.isSetting;
@@ -69,6 +64,23 @@ export default {
 				type: 'icon',
 				meta: {
 					id: service.id,
+				},
+				offset: {
+					x: 4,
+					y: 3
+				}
+			});
+		},
+		addRSSWidget() {
+			this.$store.dispatch('desktop/appendObject', {
+				type: 'widget',
+				meta: {
+					widget: 'RSS',
+					url: this.url
+				},
+				size: {
+					width: 6,
+					height: 8
 				},
 				offset: {
 					x: 4,

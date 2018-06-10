@@ -142,6 +142,66 @@
 				"x": 1,
 				"y": 4
 			}
+		},
+		{
+			"meta": {
+				"widget": "email",
+				"name": "我的邮箱"
+			},
+			"type": "widget",
+			"size": {
+				"height": 4,
+				"width": 3
+			},
+			"offset": {
+				"x": 0,
+				"y": 0
+			}
+		},
+		{
+			"meta": {
+				"widget": "statistics",
+				"name": "当日统计"
+			},
+			"type": "widget",
+			"size": {
+				"height": 6,
+				"width": 6
+			},
+			"offset": {
+				"x": 0,
+				"y": 5
+			}
+		},
+		{
+			"meta": {
+				"widget": "notification",
+				"name": "通知公告"
+			},
+			"type": "widget",
+			"size": {
+				"height": 4,
+				"width": 6
+			},
+			"offset": {
+				"x": 7,
+				"y": 0
+			}
+		},
+		{
+			"meta": {
+				"widget": "warning",
+				"name": "预警"
+			},
+			"type": "widget",
+			"size": {
+				"height": 4,
+				"width": 6
+			},
+			"offset": {
+				"x": 7,
+				"y": 6
+			}
 		}
 	]
 }

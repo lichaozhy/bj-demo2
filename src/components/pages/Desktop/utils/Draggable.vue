@@ -83,6 +83,7 @@ export default {
 	position: relative;
 	top: 0;
 	left: 0;
+	height: 100%;
 
 	&.setting::before {
 		content: "";

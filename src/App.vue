@@ -1,11 +1,16 @@
 <template>
-	<div id="app" class="h-100">
+	<div id="app" class="h-100"
+		:class="{
+			'no-select': isSetting
+		}">
 		<app-navbar />
 
 		<div id="app-container">
 			
 			<transition name="fade">
-				<router-view class="app-workbench container-fluid" />
+				<keep-alive>
+					<router-view class="app-workbench container-fluid" />
+				</keep-alive>
 			</transition>
 
 			<transition
@@ -28,7 +33,10 @@ export default {
 	computed: {
 		isSidebarShow() {
 			return this.$store.state.page.isSidebarShow;
-		}
+		},
+		isSetting() {
+			return this.$store.state.desktop.isSetting;
+		},
 	},
 	components: {
 		AppNavbar,
@@ -40,6 +48,10 @@ export default {
 <style lang="less">
 html, body {
 	height: 100%;
+}
+
+#app.no-select {
+	user-select: none;
 }
 
 #app-container {
