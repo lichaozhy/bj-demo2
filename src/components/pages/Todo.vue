@@ -2,30 +2,44 @@
 	<div>
 		<b-row class="py-3 h-100">
 			<b-col cols="8">
-				<h2>我的待办工作</h2><hr>
-				<b-input-group>
-					<b-form-input v-model="filter" placeholder="过滤关键字" />
-					<b-input-group-append>
-						<b-btn :disabled="!filter" @click="filter = ''">清除</b-btn>
+				<b-row>
+					<b-col>
+						<b-input-group>
+							<b-form-input v-model="filter" placeholder="过滤关键字" />
+							<b-input-group-append>
+								<b-btn :disabled="!filter" @click="filter = ''">清除</b-btn>
+							</b-input-group-append>
+						</b-input-group>
+					</b-col>
+					<b-col>
 						<b-form-checkbox-group
-							buttons
 							v-model="endingFilterSelected"
 							:options="endingFilterOptions">
 						</b-form-checkbox-group>
-					</b-input-group-append>
-				</b-input-group>
+					</b-col>
+					<b-col>
+						<b-pagination
+							align="center"
+							size="md"
+							:limit="7"
+							:total-rows="$refs.dataView&&$refs.dataView.filteredItems.length"
+							v-model="currentPage"
+							:per-page="perPage">
+						</b-pagination>
+					</b-col>
+				</b-row>
 
-				<b-table class="my-3"
+				<b-table class="my-1"
 					ref="dataView"
 					:current-page="currentPage"
-					:per-page="10"
+					:per-page="perPage"
 					striped
 					:filter="endingFilter"
 					hover
 					:fields="filedsConfig"
 					:items="list">
 					<template slot="end" slot-scope="data">
-						{{data.item.end === true ? '结束' : '未结束'}}
+						{{data.item.end === true ? '解决' : '未解决'}}
 					</template>
 					<template slot="startAt" slot-scope="data">
 						{{data.item.startAt|formatDate}}
@@ -37,38 +51,23 @@
 						<p :title="data.item.comment">{{data.item.comment.substr(30)+'...'}}</p>
 					</template> -->
 					<template slot="action" slot-scope="data">
-						<b-button
-							variant="danger"
+						<a href="#"
+							variant="link"
 							size="sm"
-							@click="remove(data.item)">删除</b-button>
+							@click="remove(data.item)">删除</a>
 					</template>
 				</b-table>
-				<b-pagination
-					align="center"
-					size="md"
-					:limit="7"
-					:total-rows="$refs.dataView&&$refs.dataView.filteredItems.length"
-					v-model="currentPage"
-					:per-page="10">
-				</b-pagination>
 			</b-col>
 
 			<b-col cols="4" class="h-100">
-				<b-card no-body class="h-100">
-					<b-tabs card>
-						<b-tab title="今日" active>
-							<div ref="chart-today"></div>
-						</b-tab>
-						<b-tab title="本周">
-							<div ref="chart-week"></div>
-						</b-tab>
-						<b-tab title="本月">
-							<div ref="chart-month"></div>
-						</b-tab>
-						<b-tab title="本年">
-							<div ref="chart-year"></div>
-						</b-tab>
-					</b-tabs>
+				<b-card no-body
+					header="待办统计"
+					id="todo-chart"
+					class="h-100">
+					<div ref="chart-today"></div><hr>
+					<div ref="chart-week"></div><hr>
+					<div ref="chart-month"></div><hr>
+					<div ref="chart-year"></div>
 				</b-card>
 			</b-col>
 
@@ -115,6 +114,7 @@ function mockItemList(startId = 1, length = 100) {
 export default {
 	data() {
 		return {
+			perPage: 5,
 			currentPage: 1,
 			list: [],
 			filter: '',
@@ -201,11 +201,16 @@ export default {
 	mounted() {
 		this.updateMock();
 
+		const viewHeight = this.$el.offsetHeight - 90;
+		this.perPage = Math.floor(viewHeight / 49) - 1;
+
 		Highcharts.chart(this.$refs['chart-year'], {
 			chart: {
 				type: 'column'
 			},
-			title:null,
+			title: {
+				text: '本年'
+			},
 			xAxis: {
 				categories: [
 					'一月',	'二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'
@@ -213,13 +218,13 @@ export default {
 				crosshair: true
 			},
 			series: [{
-				name: '东京',
+				name: '办结',
 				data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 			}, {
-				name: '纽约',
+				name: '草稿',
 				data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
 			}, {
-				name: '伦敦',
+				name: '待办',
 				data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
 			}]
 		})
@@ -255,7 +260,9 @@ export default {
 			chart: {
 				zoomType: 'x'
 			},
-			title: null,
+			title: {
+				text: '本月'
+			},
 			xAxis: {
 				type: 'datetime'
 			},
@@ -269,7 +276,9 @@ export default {
 			chart: {
 				type: 'column'
 			},
-			title:null,
+			title: {
+				text: '本周'
+			},
 			xAxis: {
 				categories: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
 				crosshair: true
@@ -287,12 +296,14 @@ export default {
 		})
 
 		Highcharts.chart(this.$refs['chart-today'], {
-			title: null,
+			title: {
+				text: '今天'
+			},
 			tooltip: {
 				pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
 			},
 			chart: {
-				height: 200
+				height: 300
 			},
 			plotOptions: {
 				pie: {
@@ -337,3 +348,10 @@ export default {
 	}
 }
 </script>
+
+<style>
+#todo-chart {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+</style>

@@ -2,7 +2,7 @@
 	<div>
 		<b-jumbotron class="m-5 rounded-0 text-center">
 			<template slot="header">
-				计算机学院统一门户
+				个人工作平台
 			</template>
 			<template slot="lead">
 				今天是个好日子，祝你整天工作好心情。马上又是忙碌的一天，开始你的科研课题。

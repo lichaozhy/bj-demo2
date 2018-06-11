@@ -2,7 +2,7 @@ import RendererObject from './base';
 import Icon from './Icon.vue';
 
 const ICON_GRID = {
-	step: 120,
+	step: 100,
 	origin: {
 		x: 'left',
 		y: 'top'

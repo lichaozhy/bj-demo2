@@ -3,7 +3,7 @@ import serviceList from '@/../mock/service.json';
 export default {
 	namespaced: true,
 	state: {
-		isSetting: false,
+		isSetting: true,
 		options: {},
 		serviceList: [],
 		widgetList: []

@@ -48,7 +48,7 @@
 					</b-alert>
 					
 					<b-alert show dismissible>
-						<b-card header="来自：核平系统"
+						<b-card header="来自：XX系统"
 							footer="2018-06-07">
 							发射目标：大犬座-VY
 						</b-card>

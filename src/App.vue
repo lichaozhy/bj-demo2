@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="h-100"
+	<div id="app" class="h-100" v-cloak
 		:class="{
 			'no-select': isSetting
 		}">
@@ -66,5 +66,9 @@ html, body {
 		height: 100%;
 		width: 100%;
 	}
+}
+
+[v-cloak] {
+    display: none;
 }
 </style>

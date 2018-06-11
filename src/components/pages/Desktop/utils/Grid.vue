@@ -1,23 +1,17 @@
 <template>
-	<div class="desktop-grid"
-		:class="{setting:isSetting}">
+	<div class="desktop-grid" @click="cancelSelected()">
 		<div class="desktop-object"
 			v-for="(rendererObject, index) in rendererList"
 			:key="index"
+			@click.stop="select(index)"
+			@dblclick="remove(index)"
 			@drop="setPosition($event, rendererObject, index)"
 			:style="rendererObject.style">
 			<draggable :is-prevented="!isSetting">
 				<component :is="rendererObject.component"
+					:selected="index === activeIndex"
 					:object="rendererObject" />
 			</draggable>
-			<b-button-group
-				v-if="isSetting"
-				class="object-toolbar"
-				size="sm">
-				<b-button
-					@click="remove(index)"
-					variant="danger"><font-awesome-icon icon="trash" /></b-button>
-			</b-button-group>
 		</div>
 	</div>
 </template>
@@ -29,6 +23,7 @@ import fromDesktopOptions from './renderer/index';
 export default {
 	data() {
 		return {
+			activeIndex: -1
 		}
 	},
 	computed: {
@@ -47,6 +42,14 @@ export default {
 	methods: {
 		remove(index) {
 			this.$store.dispatch('desktop/removeObject', index);
+			
+			this.cancelSelected();
+		},
+		select(index) {
+			this.activeIndex = index;
+		},
+		cancelSelected() {
+			this.activeIndex = -1;
 		},
 		setPosition(event, rendererObject, index) {
 			const point = {
@@ -93,10 +96,6 @@ export default {
 	position: relative;
 	height: 100%;
 	width: 100%;
-
-	&.setting .desktop-object{
-		box-shadow: 0 0 1px 1px inset #f0f0f0 ;
-	}
 
 	.desktop-object {
 		position: absolute;

@@ -2,17 +2,6 @@
 	<b-card no-body
 		class="rounded-0 w-100 h-100 border-top">
 		<b-tabs pills card vertical class="h-100">
-			<b-tab active>
-				<template slot="title">
-					<font-awesome-icon icon="cog" fixed-width />控制面板
-				</template>
-				<b-btn v-if="isSetting"
-					variant="primary"
-					@click="deactiveSetting()">确认布局</b-btn>
-				<b-btn v-if="!isSetting"
-					variant="success"
-					@click="activeSetting()">开始布局</b-btn>
-			</b-tab>
 			<b-tab class="desktop-apps">
 				<template slot="title">
 					<font-awesome-icon icon="cubes" fixed-width />所有应用
@@ -22,7 +11,7 @@
 					@click="addToDesktop(service)"
 					variant="outline-primary"
 					:key="service.id">
-					<div class="mb-3"><img src="@/assets/apps/2.svg" /></div>
+					<div class="mb-3" id="app-icon-15"></div>
 					{{service.name}}
 				</b-btn>
 			</b-tab>
@@ -41,7 +30,7 @@
 export default {
 	data() {
 		return {
-			url: '',
+			url: 'http://rss.news.sohu.com/rss/focus.xml',
 		}
 	},
 	computed: {

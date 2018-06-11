@@ -1,5 +1,5 @@
 <template>
-	<div class="py-3">
+	<div class="py-3 overflow-auto">
 		<h2>巡视审计</h2><hr>
 		
 		<b-input-group prepend="员工编号">
@@ -10,24 +10,23 @@
 			</b-input-group-append>
 		</b-input-group>
 
-		<b-row class="mt-3">
-			<b-col>
+		<b-row>
+			<b-col cols="3" class="my-3">
 				<b-card title="今日">
 					<div ref="chart-today"></div>
 				</b-card>
 			</b-col>
-			<b-col>
+			<b-col cols="3" class="my-3">
 				<b-card title="本周">
 					<div ref="chart-week"></div>
 				</b-card>
 			</b-col>
-			<div class="w-100 my-3"></div>
-			<b-col>
+			<b-col cols="3" class="my-3">
 				<b-card title="本月">
 					<div ref="chart-month"></div>
 				</b-card>
 			</b-col>
-			<b-col>
+			<b-col cols="3" class="my-3">
 				<b-card title="本年">
 					<div ref="chart-year"></div>
 				</b-card>

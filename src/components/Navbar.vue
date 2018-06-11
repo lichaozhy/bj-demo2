@@ -7,7 +7,7 @@
 
 		<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-		<b-navbar-brand to="/">计算机学院统一门户</b-navbar-brand>
+		<b-navbar-brand to="/">个人工作平台</b-navbar-brand>
 
 		<b-collapse is-nav id="nav_collapse">
 
