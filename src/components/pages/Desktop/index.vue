@@ -4,9 +4,33 @@
       <desktop-grid />
     </div>
 
-    <div id="desktop-menu">
+    <!-- <div id="desktop-menu">
+    </div> -->
+
+    <b-btn id="desktop-menu-button"
+      size="sm"
+      v-b-modal.desktopMenu
+      variant="success">
+      <font-awesome-icon icon="plus" fixed-width />
+    </b-btn>
+    
+    <b-modal id="desktopMenu"
+      button-size="sm"
+      centered
+      ok-only
+      ok-title="好的"
+      title="桌面控制面板" size="lg">
       <desktop-menu />
-    </div>
+    </b-modal>
+    
+    <b-modal id="launch"
+      button-size="sm"
+      centered
+      ok-only
+      ok-title="好的"
+      title="打开应用" size="sm">
+      应用即将打开...
+    </b-modal>
   </div>
 </template>
 
@@ -45,13 +69,10 @@ export default {
   }
 }
 
-#desktop-menu {
-  background-color: #ccc;
-  height: 200px;
+#desktop-menu-button {
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  bottom: 15px;
+  left: 15px;
 }
 
 #desktop-grid {

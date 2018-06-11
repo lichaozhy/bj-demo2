@@ -1,6 +1,6 @@
 <template>
     <b-card :title="feed.title"
-        class="h-100 rss-widget"
+        class="rss-widget"
         :sub-title="feed.generator">
         <p class="card-text"
             :title="feed.description">{{feed.description}}</p>
@@ -47,10 +47,10 @@ export default {
 <style lang="less">
 .rss-widget {
     position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
 
     p {
         white-space: nowrap;

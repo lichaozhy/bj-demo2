@@ -2,7 +2,7 @@
 	<widget :object="object">
 		<b-button variant="link"
 			class="text-center position-relative">
-			<img style="width:80px"
+			<img style="width:60px"
 				src="../../../../assets/mailbox.svg" alt="">
 			<b-badge variant="danger"
 				class="position-absolute">9</b-badge>

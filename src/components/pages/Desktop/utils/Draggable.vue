@@ -3,7 +3,6 @@
 		:class="{
 			active: isDragging,
 		}"
-		@click="cancel()"
 		@mouseup="drop($event)"
 		@mousedown="drag($event)"
 		@mousemove="move($event)">
@@ -13,13 +12,9 @@
 
 <script>
 export default {
-	computed: {
-		isSetting() {
-			return this.$store.state.desktop.isSetting;
-		},
-	},
 	data() {
 		return {
+			throttle: null,
 			isDragging: false,
 			start: { x: 0, y: 0 },
 			pointOnTarget: {x: 0, y: 0}
@@ -32,21 +27,28 @@ export default {
 		}
 	},
 	methods: {
+		cancel() {
+			clearTimeout(this.throttle);
+			this.throttle = null;
+		},
 		drag(event) {
 			if (this.isPrevented) {
 				return;
 			}
+
+			this.throttle = setTimeout(() => {
+				this.isDragging = true;
+	
+				this.start.x = event.clientX;
+				this.start.y = event.clientY;
+				this.pointOnTarget = {
+					x: event.offsetX,
+					y: event.offsetY
+				};
+	
+				this.$emit('drag');
+			}, 150);
 			
-			this.isDragging = true;
-
-			this.start.x = event.clientX;
-			this.start.y = event.clientY;
-			this.pointOnTarget = {
-				x: event.offsetX,
-				y: event.offsetY
-			};
-
-			this.$emit('drag');
 		},
 		move(event) {
 			if (!this.isDragging) {
@@ -58,30 +60,26 @@ export default {
 		},
 		drop(event) {
 			if (!this.isDragging) {
-				return;
+				return this.cancel();
 			}
 
 			this.isDragging = false;
 			this.start.x = 0;
 			this.start.y = 0;
 
-			const dropEvent = new MouseEvent('drop', {
-				cancelable: true,
-				bubbles: true,
-				clientX: event.clientX,
-				clientY: event.clientY
-			});
+			setTimeout(() => {
+				const dropEvent = new MouseEvent('drop', {
+					cancelable: true,
+					bubbles: true,
+					clientX: event.clientX,
+					clientY: event.clientY
+				});
 
-			dropEvent.pointOnTarget = this.pointOnTarget;
+				this.$el.dispatchEvent(dropEvent);
 
-			this.$el.dispatchEvent(dropEvent);
-
-			this.pointOnTarget = {};
-			this.$el.style.left = 0;
-			this.$el.style.top = 0;
-		},
-		cancel() {
-			this.isDragging = false;
+				this.$el.style.left = 0;
+				this.$el.style.top = 0;
+			}, 30);
 		}
 	}
 	

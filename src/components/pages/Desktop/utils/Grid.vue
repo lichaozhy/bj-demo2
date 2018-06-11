@@ -4,7 +4,7 @@
 			v-for="(rendererObject, index) in rendererList"
 			:key="index"
 			@click.stop="select(index)"
-			@dblclick="remove(index)"
+			@mouseup.middle="remove(index)"
 			@drop="setPosition($event, rendererObject, index)"
 			:style="rendererObject.style">
 			<draggable :is-prevented="!isSetting">

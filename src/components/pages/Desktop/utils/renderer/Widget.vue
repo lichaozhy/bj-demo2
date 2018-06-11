@@ -1,6 +1,6 @@
 <template>
     <b-card :header="object.meta.name"
-        class="h-100">
+        class="widget">
         
         <slot />
     </b-card>
@@ -12,3 +12,13 @@ export default {
 
 }
 </script>
+
+<style>
+.widget {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+}
+</style>

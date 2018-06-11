@@ -2,6 +2,7 @@
 	<div class="app-service-icon"
 		:class="{selected:selected}">
 		<b-btn class="icon-btn"
+			@dblclick="launch()"
 			variant="link"
 			size="sm">
 			<div :id="`app-icon-${service.id}`">
@@ -23,6 +24,11 @@ export default {
 			return serviceMock.find(service => {
 				return service.id === serviceId;
 			});
+		}
+	},
+	methods: {
+		launch() {
+			this.$root.$emit('bv::show::modal','launch');
 		}
 	}
 }

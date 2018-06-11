@@ -1,7 +1,8 @@
 <template>
 	<b-card no-body
-		class="rounded-0 w-100 h-100 border-top">
-		<b-tabs pills card vertical class="h-100">
+		style="height:400px"
+		class="rounded-0 w-100">
+		<b-tabs card class="h-100">
 			<b-tab class="desktop-apps">
 				<template slot="title">
 					<font-awesome-icon icon="cubes" fixed-width />所有应用
@@ -9,9 +10,9 @@
 				<b-btn v-for="service in remainingService"
 					class="service-icon"
 					@click="addToDesktop(service)"
-					variant="outline-primary"
+					variant="link"
 					:key="service.id">
-					<div class="mb-3" id="app-icon-15"></div>
+					<div :id="`app-icon-${service.id}`"></div>
 					{{service.name}}
 				</b-btn>
 			</b-tab>
@@ -85,11 +86,17 @@ export default {
 .desktop-apps {
 	.service-icon {
 		text-align: center;
-		height: 120px;
-		width: 120px;
+		height: 100px;
+		width: 100px;
 		margin: 0 15px;
-		img {
+		font-size: 12px;
+		color: #000;
+		
+		div {
 			height: 60px;
+			width: 100%;
+			background-position: center;
+			background-repeat: no-repeat;
 		}
 	}
 }
