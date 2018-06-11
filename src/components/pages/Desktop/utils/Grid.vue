@@ -52,35 +52,27 @@ export default {
 			this.activeIndex = -1;
 		},
 		setPosition(event, rendererObject, index) {
-			const point = {
-				left: event.clientX,
-				top: event.clientY
-			};
-
-			const field = {
-				left: 15,
-				top: 71,
-				height: this.$el.offsetHeight,
-				width: this.$el.offsetWidth
-			};
+			const field = this.$el.getBoundingClientRect();
+			const target = event.target.getBoundingClientRect();
 
 			const { origin, step } = rendererObject.grid;
 			const offset = { x: null, y: null };
 
 			if (origin.x === 'left') {
-				offset.x = Math.floor((point.left - field.left) / step);
+				offset.x = Math.floor((target.left + step / 2 - field.left) / step);
 			}
 
 			if (origin.x === 'right') {
-				offset.x = Math.floor((field.width + field.left - point.left) / step);
+				offset.x =
+					Math.floor((field.right - target.right + step / 2) / step);
 			}
 			
 			if (origin.y === 'top') {
-				offset.y = Math.floor((point.top - field.top) / step);
+				offset.y = Math.floor((target.top + step / 2 - field.top) / step);
 			}
 
 			if (origin.y === 'bottom') {
-				offset.y = Math.floor((field.height + field.top - point.top) / step);
+				offset.y = Math.floor((field.bottom - target.bottom + step / 2) / step);
 			}
 
 			this.$store.dispatch('desktop/setObjectOffset', {

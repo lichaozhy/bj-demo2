@@ -46,6 +46,12 @@ export default {
 
 <style lang="less">
 .rss-widget {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+
     p {
         white-space: nowrap;
         width: 100%;

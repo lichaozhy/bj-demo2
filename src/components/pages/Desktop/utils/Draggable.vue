@@ -2,7 +2,6 @@
 	<div class="draggable"
 		:class="{
 			active: isDragging,
-			setting:isSetting
 		}"
 		@click="cancel()"
 		@mouseup="drop($event)"
@@ -23,7 +22,8 @@ export default {
 		return {
 			isDragging: false,
 			start: { x: 0, y: 0 },
-		}
+			pointOnTarget: {x: 0, y: 0}
+		};
 	},
 	props: {
 		isPrevented: {
@@ -41,6 +41,10 @@ export default {
 
 			this.start.x = event.clientX;
 			this.start.y = event.clientY;
+			this.pointOnTarget = {
+				x: event.offsetX,
+				y: event.offsetY
+			};
 
 			this.$emit('drag');
 		},
@@ -60,15 +64,21 @@ export default {
 			this.isDragging = false;
 			this.start.x = 0;
 			this.start.y = 0;
-			this.$el.style.left = 0;
-			this.$el.style.top = 0;
 
-			this.$el.dispatchEvent(new MouseEvent('drop', {
+			const dropEvent = new MouseEvent('drop', {
 				cancelable: true,
 				bubbles: true,
 				clientX: event.clientX,
 				clientY: event.clientY
-			}));
+			});
+
+			dropEvent.pointOnTarget = this.pointOnTarget;
+
+			this.$el.dispatchEvent(dropEvent);
+
+			this.pointOnTarget = {};
+			this.$el.style.left = 0;
+			this.$el.style.top = 0;
 		},
 		cancel() {
 			this.isDragging = false;
@@ -84,16 +94,6 @@ export default {
 	top: 0;
 	left: 0;
 	height: 100%;
-
-	&.setting::before {
-		content: "";
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		z-index: 10;
-		top:0;
-		left: 0;
-	}
 
 	&.active::after {
 		position: fixed;
